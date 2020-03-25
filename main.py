@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import random
 from datetime import datetime
+from scipy.optimize import curve_fit
 
 # FILTERED_REGIONS = ["Abruzzo", "Basilicata", "P.A. Bolzano", "Calabria", "Campania", "Emilia Romagna", "Friuli Venezia Giulia", "Lazio", "Liguria", "Lombardia", "Marche", "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana", "P.A. Trento", "Umbria", "Valle d'Aosta", "Veneto"]
 FILTERED_REGIONS = ["Italia", "Emilia Romagna", "Lombardia", "Piemonte", "Veneto"]
@@ -51,13 +52,22 @@ for region in FILTERED_REGIONS:
   # regions_data[region].index = range(regions_data[region].size)
 
   regions_data[region]["totale_casi_ieri"] = regions_data[region]["totale_casi"].shift(1)
-  regions_data[region]["delta_totale"] = (regions_data[region]["totale_casi"] - regions_data[region]["totale_casi_ieri"]) / regions_data[region]["totale_casi_ieri"] * 100
+  today = regions_data[region]["totale_casi"]
+  yesterday = regions_data[region]["totale_casi_ieri"]
+  # regions_data[region]["delta_totale"] = (today - yesterday) / yesterday * 100
+  regions_data[region]["delta_totale"] = (today - yesterday)
 
   regions_data[region]["terapia_intensiva_ieri"] = regions_data[region]["terapia_intensiva"].shift(1)
-  regions_data[region]["delta_terapia_intensiva"] = (regions_data[region]["terapia_intensiva"] - regions_data[region]["terapia_intensiva_ieri"]) / regions_data[region]["terapia_intensiva_ieri"] * 100
+  today = regions_data[region]["terapia_intensiva"]
+  yesterday = regions_data[region]["terapia_intensiva_ieri"]
+  # regions_data[region]["delta_terapia_intensiva"] = (today - yesterday) / yesterday * 100
+  regions_data[region]["delta_terapia_intensiva"] = (today - yesterday)
 
   regions_data[region]["deceduti_ieri"] = regions_data[region]["deceduti"].shift(1)
-  regions_data[region]["delta_deceduti"] = (regions_data[region]["deceduti"] - regions_data[region]["deceduti_ieri"]) / regions_data[region]["deceduti_ieri"] * 100
+  today = regions_data[region]["deceduti"]
+  yesterday = regions_data[region]["deceduti_ieri"]
+  # regions_data[region]["delta_deceduti"] = (today - yesterday) / yesterday * 100
+  regions_data[region]["delta_deceduti"] = (today - yesterday)
 
   regions_list.append(regions_data[region])
 
@@ -78,13 +88,13 @@ for region in FILTERED_REGIONS:
 
 
 axs[0, 0].set_title('Totale casi')
-axs[0, 1].set_title('Δ casi giornalieri (%)')
+axs[0, 1].set_title('Aumento casi su giorno precedente')
 
 axs[1, 0].set_title('Terapia intensiva')
-axs[1, 1].set_title('Δ TI giornalieri (%)')
+axs[1, 1].set_title('Aumento TI su giorno precedente')
 
 axs[2, 0].set_title('Deceduti')
-axs[2, 1].set_title('Δ deceduti (%)')
+axs[2, 1].set_title('Aumento deceduti su giorno precedente')
 
 axs[2, 1].legend(loc='upper center', bbox_to_anchor=(0, -0.2), ncol=5, fancybox=True, shadow=True)
 
