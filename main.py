@@ -35,7 +35,7 @@ df = df[df["denominazione_regione"].isin(FILTERED_REGIONS)]
 # df.plot(x = "data", y = "totale_casi", kind = "scatter")
 # plt.show()
 
-plt.subplots(2)
+fig, axs = plt.subplots(2, 2)
 
 regions_data = {}
 regions_list = []
@@ -51,10 +51,15 @@ for region in FILTERED_REGIONS:
     count += 1
 
   # regions_data[region].plot(x = "day", y = "totale_casi")
-  plt.plot("day", "totale_casi", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
-  plt.plot("day", "terapia_intensiva", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
-  # plt.plot("day", "nuovi_attualmente_positivi", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
-  # plt.plot("day", "deceduti", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
+  axs[0, 0].plot("day", "totale_casi", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
+  axs[0, 0].set_title('Totale casi')
+  axs[0, 1].plot("day", "terapia_intensiva", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
+  axs[0, 1].set_title('Terapia intensiva')
+  axs[1, 0].plot("day", "nuovi_attualmente_positivi", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
+  axs[1, 0].set_title('Nuovi casi')
+  axs[1, 1].plot("day", "deceduti", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
+  axs[1, 1].set_title('Deceduti')
+  axs[1, 1].legend(loc='upper center', bbox_to_anchor=(0, -0.1), ncol=5, fancybox=True, shadow=True)
 
 
 # regions_data["Veneto"].plot(x = "day", y = "totale_casi", kind = "scatter")
@@ -62,11 +67,14 @@ for region in FILTERED_REGIONS:
 
 # italy = pd.concat(regions_list, axis=0)
 # italy.plot(x = "day", y = "totale_casi") #, kind = "scatter")
-plt.legend(loc='upper center', shadow=True, ncol=2)
-plt.title('Totale casi')
+
+# plt.legend(loc='upper center', shadow=True, ncol=2)
+
+# plt.title('Totale casi')
 # plt.title('Terapia intensiva')
 # plt.title('Nuovi casi')
 # plt.title('Deceduti')
+
 plt.show()
 
 # printRegions(FILTERED_REGIONS, regions_data)
