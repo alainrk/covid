@@ -49,10 +49,10 @@ for region in FILTERED_REGIONS:
     count += 1
 
   # regions_data[region].plot(x = "day", y = "totale_casi")
-  # plt.plot("day", "totale_casi", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
+  plt.plot("day", "totale_casi", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
   # plt.plot("day", "terapia_intensiva", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
   # plt.plot("day", "nuovi_attualmente_positivi", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
-  plt.plot("day", "deceduti", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
+  # plt.plot("day", "deceduti", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
 
 
 # regions_data["Veneto"].plot(x = "day", y = "totale_casi", kind = "scatter")
@@ -61,10 +61,10 @@ for region in FILTERED_REGIONS:
 # italy = pd.concat(regions_list, axis=0)
 # italy.plot(x = "day", y = "totale_casi") #, kind = "scatter")
 plt.legend(loc='upper center', shadow=True, ncol=2)
-# plt.title('Totale casi')
+plt.title('Totale casi')
 # plt.title('Terapia intensiva')
 # plt.title('Nuovi casi')
-plt.title('Deceduti')
+# plt.title('Deceduti')
 plt.show()
 
 # printRegions(FILTERED_REGIONS, regions_data)
