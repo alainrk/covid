@@ -3,17 +3,19 @@ import scipy as misc
 import pandas as pd
 import matplotlib.pyplot as plt
 import random
+from lmfit.models import LorentzianModel
 
 # FILTERED_REGIONS = ["Abruzzo", "Basilicata", "P.A. Bolzano", "Calabria", "Campania", "Emilia Romagna", "Friuli Venezia Giulia", "Lazio", "Liguria", "Lombardia", "Marche", "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana", "P.A. Trento", "Umbria", "Valle d'Aosta", "Veneto"]
-FILTERED_REGIONS = ["Emilia Romagna", "Lombardia", "Piemonte", "Veneto"]
+FILTERED_REGIONS = ["Italia", "Emilia Romagna", "Lombardia", "Piemonte", "Veneto"]
 # FILTERED_REGIONS = ["Lombardia", "Veneto"]
-COLORS = { "Emilia Romagna": "green", "Lazio": "red", "Lombardia": "blue", "Piemonte": "brown", "Puglia": "orange", "Toscana": "purple", "Veneto": "black" }
+COLORS = { "Emilia Romagna": "green", "Lazio": "magenta", "Lombardia": "blue", "Piemonte": "red", "Puglia": "pink", "Toscana": "purple", "Veneto": "orange", "Italia": "black" }
 
 def randColor():
   return (random.random(), random.random(), random.random(), 1)
 
 def convertData(d):
   return d.split(" ")[0]
+  # return d.split("T")[0]
 
 def printRegions(regions, regions_data):
   for region in regions:
@@ -22,9 +24,17 @@ def printRegions(regions, regions_data):
 # Useful columns
 # data,denominazione_regione,ricoverati_con_sintomi,terapia_intensiva,totale_ospedalizzati,isolamento_domiciliare,totale_attualmente_positivi,nuovi_attualmente_positivi,dimessi_guariti,deceduti,totale_casi,tamponi
 
-df = pd.read_csv("data.csv")
-df = df.filter(["data", "denominazione_regione", "totale_casi", "terapia_intensiva", "nuovi_attualmente_positivi", "deceduti"])
-df["day"] = -1
+df_it = pd.read_csv("italia.csv")
+df_it = df_it.filter(["data", "denominazione_regione", "totale_casi", "terapia_intensiva", "nuovi_attualmente_positivi", "deceduti"])
+df_it["day"] = -1
+df_it["denominazione_regione"] = "Italia"
+
+df_reg = pd.read_csv("regioni.csv")
+df_reg = df_reg.filter(["data", "denominazione_regione", "totale_casi", "terapia_intensiva", "nuovi_attualmente_positivi", "deceduti"])
+df_reg["day"] = -1
+
+frames = [df_it, df_reg]
+df = pd.concat(frames)
 
 # Clean date
 df["data"] = df["data"].apply(convertData)
