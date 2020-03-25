@@ -35,6 +35,8 @@ df = df[df["denominazione_regione"].isin(FILTERED_REGIONS)]
 # df.plot(x = "data", y = "totale_casi", kind = "scatter")
 # plt.show()
 
+plt.subplots(2)
+
 regions_data = {}
 regions_list = []
 for region in FILTERED_REGIONS:
@@ -50,7 +52,7 @@ for region in FILTERED_REGIONS:
 
   # regions_data[region].plot(x = "day", y = "totale_casi")
   plt.plot("day", "totale_casi", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
-  # plt.plot("day", "terapia_intensiva", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
+  plt.plot("day", "terapia_intensiva", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
   # plt.plot("day", "nuovi_attualmente_positivi", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
   # plt.plot("day", "deceduti", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
 
