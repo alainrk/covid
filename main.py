@@ -59,22 +59,8 @@ for region in FILTERED_REGIONS:
   axs[1, 0].set_title('Nuovi casi')
   axs[1, 1].plot("day", "deceduti", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
   axs[1, 1].set_title('Deceduti')
-  axs[1, 1].legend(loc='upper center', bbox_to_anchor=(0, -0.1), ncol=5, fancybox=True, shadow=True)
 
-
-# regions_data["Veneto"].plot(x = "day", y = "totale_casi", kind = "scatter")
-# plt.show()
-
-# italy = pd.concat(regions_list, axis=0)
-# italy.plot(x = "day", y = "totale_casi") #, kind = "scatter")
-
-# plt.legend(loc='upper center', shadow=True, ncol=2)
-
-# plt.title('Totale casi')
-# plt.title('Terapia intensiva')
-# plt.title('Nuovi casi')
-# plt.title('Deceduti')
-
+axs[1, 1].legend(loc='upper center', bbox_to_anchor=(0, -0.1), ncol=5, fancybox=True, shadow=True)
 plt.show()
 
 # printRegions(FILTERED_REGIONS, regions_data)
