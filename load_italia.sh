@@ -1,6 +1,3 @@
-https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-andamento-nazionale/dpc-covid19-ita-andamento-nazionale-20200323.csv
-
-
 #!/bin/sh
 
 curl https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-andamento-nazionale/dpc-covid19-ita-andamento-nazionale-20200323.csv | head -1 > italia.csv
