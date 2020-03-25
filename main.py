@@ -3,7 +3,7 @@ import scipy as misc
 import pandas as pd
 import matplotlib.pyplot as plt
 import random
-from lmfit.models import LorentzianModel
+from datetime import datetime
 
 # FILTERED_REGIONS = ["Abruzzo", "Basilicata", "P.A. Bolzano", "Calabria", "Campania", "Emilia Romagna", "Friuli Venezia Giulia", "Lazio", "Liguria", "Lombardia", "Marche", "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana", "P.A. Trento", "Umbria", "Valle d'Aosta", "Veneto"]
 FILTERED_REGIONS = ["Italia", "Emilia Romagna", "Lombardia", "Piemonte", "Veneto"]
@@ -88,6 +88,8 @@ axs[2, 1].set_title('Δ deceduti (%)')
 
 axs[2, 1].legend(loc='upper center', bbox_to_anchor=(0, -0.2), ncol=5, fancybox=True, shadow=True)
 
+fig.suptitle('Covid-19 [{}]'.format(datetime.now().strftime("%d/%m/%Y")))
+plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=None, hspace=0.3)
 plt.show()
 
 # printRegions(FILTERED_REGIONS, regions_data)
