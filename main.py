@@ -7,12 +7,21 @@ from datetime import datetime
 from scipy.optimize import curve_fit
 
 # FILTERED_REGIONS = ["Abruzzo", "Basilicata", "P.A. Bolzano", "Calabria", "Campania", "Emilia Romagna", "Friuli Venezia Giulia", "Lazio", "Liguria", "Lombardia", "Marche", "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana", "P.A. Trento", "Umbria", "Valle d'Aosta", "Veneto"]
-FILTERED_REGIONS = ["Italia", "Emilia Romagna", "Lombardia", "Piemonte", "Veneto"]
+# FILTERED_REGIONS = ["Italia", "Emilia Romagna", "Lombardia", "Piemonte", "Veneto"]
+FILTERED_REGIONS = ["Abruzzo", "Calabria", "Campania", "Lazio", "Puglia", "Sardegna", "Sicilia"]
+FILTERED_REGIONS = ["Lazio", "Puglia"]
+# FILTERED_REGIONS = ["Abruzzo", "Basilicata", "Calabria", "Campania", "Lazio", "Liguria", "Molise", "Puglia", "Sardegna", "Sicilia", "Umbria"]
 # FILTERED_REGIONS = ["Lombardia", "Veneto"]
+
 COLORS = { "Emilia Romagna": "green", "Lazio": "magenta", "Lombardia": "blue", "Piemonte": "red", "Puglia": "pink", "Toscana": "purple", "Veneto": "orange", "Italia": "black" }
 
 def randColor():
   return (random.random(), random.random(), random.random(), 1)
+
+def getColor(region):
+  if region in COLORS:
+    return COLORS[region]
+  return randColor()
 
 def convertData(d):
   return d.split(" ")[0]
@@ -77,14 +86,14 @@ for region in FILTERED_REGIONS:
     regions_data[region].at[index, "day"] = count
     count += 1
 
-  axs[0, 0].plot("day", "totale_casi", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
-  axs[0, 1].plot("day", "delta_totale", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
+  axs[0, 0].plot("day", "totale_casi", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
+  axs[0, 1].plot("day", "delta_totale", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
 
-  axs[1, 0].plot("day", "terapia_intensiva", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
-  axs[1, 1].plot("day", "delta_terapia_intensiva", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
+  axs[1, 0].plot("day", "terapia_intensiva", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
+  axs[1, 1].plot("day", "delta_terapia_intensiva", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
 
-  axs[2, 0].plot("day", "deceduti", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
-  axs[2, 1].plot("day", "delta_deceduti", label=region, data=regions_data[region], markersize=2, color=COLORS[region], linewidth=2)
+  axs[2, 0].plot("day", "deceduti", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
+  axs[2, 1].plot("day", "delta_deceduti", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
 
 
 axs[0, 0].set_title('Totale casi')
@@ -98,7 +107,7 @@ axs[2, 1].set_title('Aumento deceduti su giorno precedente')
 
 axs[2, 1].legend(loc='upper center', bbox_to_anchor=(0, -0.2), ncol=5, fancybox=True, shadow=True)
 
-fig.suptitle('Covid-19 [{}]'.format(datetime.now().strftime("%d/%m/%Y")))
+fig.suptitle('Covid-19 [{}]\nNormalizzato su 100 casi a t0'.format(datetime.now().strftime("%d/%m/%Y")))
 plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=None, hspace=0.3)
 plt.show()
 
