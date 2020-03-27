@@ -7,11 +7,7 @@ from datetime import datetime
 from scipy.optimize import curve_fit
 
 # FILTERED_REGIONS = ["Abruzzo", "Basilicata", "P.A. Bolzano", "Calabria", "Campania", "Emilia Romagna", "Friuli Venezia Giulia", "Lazio", "Liguria", "Lombardia", "Marche", "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana", "P.A. Trento", "Umbria", "Valle d'Aosta", "Veneto"]
-# FILTERED_REGIONS = ["Italia", "Emilia Romagna", "Lombardia", "Piemonte", "Veneto"]
-FILTERED_REGIONS = ["Abruzzo", "Calabria", "Campania", "Lazio", "Puglia", "Sardegna", "Sicilia"]
-FILTERED_REGIONS = ["Lazio", "Puglia"]
-# FILTERED_REGIONS = ["Abruzzo", "Basilicata", "Calabria", "Campania", "Lazio", "Liguria", "Molise", "Puglia", "Sardegna", "Sicilia", "Umbria"]
-# FILTERED_REGIONS = ["Lombardia", "Veneto"]
+FILTERED_REGIONS = ["Italia", "Emilia Romagna", "Lombardia", "Piemonte", "Veneto"]
 
 COLORS = { "Emilia Romagna": "green", "Lazio": "magenta", "Lombardia": "blue", "Piemonte": "red", "Puglia": "pink", "Toscana": "purple", "Veneto": "orange", "Italia": "black" }
 
