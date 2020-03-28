@@ -7,7 +7,9 @@ from datetime import datetime
 from scipy.optimize import curve_fit
 
 # FILTERED_REGIONS = ["Abruzzo", "Basilicata", "P.A. Bolzano", "Calabria", "Campania", "Emilia Romagna", "Friuli Venezia Giulia", "Lazio", "Liguria", "Lombardia", "Marche", "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana", "P.A. Trento", "Umbria", "Valle d'Aosta", "Veneto"]
-FILTERED_REGIONS = ["Italia", "Emilia Romagna", "Lombardia", "Piemonte", "Veneto"]
+# FILTERED_REGIONS = ["Italia", "Emilia Romagna", "Lombardia", "Piemonte", "Veneto"]
+FILTERED_REGIONS = ["Emilia Romagna", "Lombardia", "Piemonte", "Veneto"]
+# FILTERED_REGIONS = ["Calabria", "Puglia", "Lazio"]
 
 COLORS = { "Emilia Romagna": "green", "Lazio": "magenta", "Lombardia": "blue", "Piemonte": "red", "Puglia": "pink", "Toscana": "purple", "Veneto": "orange", "Italia": "black" }
 
@@ -19,6 +21,11 @@ def getColor(region):
     return COLORS[region]
   return randColor()
 
+def setColors():
+  for region in FILTERED_REGIONS:
+    if region not in COLORS:
+      COLORS[region] = randColor()
+
 def convertData(d):
   return d.split(" ")[0]
   # return d.split("T")[0]
@@ -26,6 +33,9 @@ def convertData(d):
 def printRegions(regions, regions_data):
   for region in regions:
     print(regions_data[region].head(), '\n\n')
+
+setColors()
+print(COLORS)
 
 # Useful columns
 # data,denominazione_regione,ricoverati_con_sintomi,terapia_intensiva,totale_ospedalizzati,isolamento_domiciliare,totale_attualmente_positivi,nuovi_attualmente_positivi,dimessi_guariti,deceduti,totale_casi,tamponi
@@ -82,14 +92,17 @@ for region in FILTERED_REGIONS:
     regions_data[region].at[index, "day"] = count
     count += 1
 
-  axs[0, 0].plot("day", "totale_casi", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
-  axs[0, 1].plot("day", "delta_totale", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
+  # X = 'totale_casi'
+  X = 'day'
 
-  axs[1, 0].plot("day", "terapia_intensiva", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
-  axs[1, 1].plot("day", "delta_terapia_intensiva", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
+  axs[0, 0].plot(X, "totale_casi", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
+  axs[0, 1].plot(X, "delta_totale", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
 
-  axs[2, 0].plot("day", "deceduti", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
-  axs[2, 1].plot("day", "delta_deceduti", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
+  axs[1, 0].plot(X, "terapia_intensiva", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
+  axs[1, 1].plot(X, "delta_terapia_intensiva", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
+
+  axs[2, 0].plot(X, "deceduti", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
+  axs[2, 1].plot(X, "delta_deceduti", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
 
 
 axs[0, 0].set_title('Totale casi')
