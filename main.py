@@ -7,9 +7,7 @@ from datetime import datetime
 from scipy.optimize import curve_fit
 
 # FILTERED_REGIONS = ["Abruzzo", "Basilicata", "P.A. Bolzano", "Calabria", "Campania", "Emilia Romagna", "Friuli Venezia Giulia", "Lazio", "Liguria", "Lombardia", "Marche", "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana", "P.A. Trento", "Umbria", "Valle d'Aosta", "Veneto"]
-# FILTERED_REGIONS = ["Italia", "Emilia Romagna", "Lombardia", "Piemonte", "Veneto"]
-FILTERED_REGIONS = ["Emilia Romagna", "Lombardia", "Piemonte", "Veneto"]
-# FILTERED_REGIONS = ["Calabria", "Puglia", "Lazio"]
+FILTERED_REGIONS = ["Italia", "Emilia Romagna", "Lombardia", "Piemonte", "Veneto"]
 
 COLORS = { "Emilia Romagna": "green", "Lazio": "magenta", "Lombardia": "blue", "Piemonte": "red", "Puglia": "pink", "Toscana": "purple", "Veneto": "orange", "Italia": "black" }
 
@@ -27,7 +25,7 @@ def setColors():
       COLORS[region] = randColor()
 
 def convertData(d):
-  return d.split(" ")[0]
+  return d.split("T")[0]
   # return d.split("T")[0]
 
 def printRegions(regions, regions_data):
@@ -35,7 +33,6 @@ def printRegions(regions, regions_data):
     print(regions_data[region].head(), '\n\n')
 
 setColors()
-print(COLORS)
 
 # Useful columns
 # data,denominazione_regione,ricoverati_con_sintomi,terapia_intensiva,totale_ospedalizzati,isolamento_domiciliare,totale_attualmente_positivi,nuovi_attualmente_positivi,dimessi_guariti,deceduti,totale_casi,tamponi
