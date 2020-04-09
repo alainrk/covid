@@ -9,15 +9,15 @@ from scipy.optimize import curve_fit
 # ONLY_SINGLE_ONE = True
 ONLY_SINGLE_ONE = False
 
-# FILTERED_REGIONS = ["Abruzzo", "Basilicata", "P.A. Bolzano", "Calabria", "Campania", "Emilia Romagna", "Friuli Venezia Giulia", "Lazio", "Liguria", "Lombardia", "Marche", "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana", "P.A. Trento", "Umbria", "Valle d'Aosta", "Veneto"]
+# FILTERED_REGIONS = ["Abruzzo", "Basilicata", "P.A. Bolzano", "Calabria", "Campania", "Emilia-Romagna", "Friuli Venezia Giulia", "Lazio", "Liguria", "Lombardia", "Marche", "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana", "P.A. Trento", "Umbria", "Valle d'Aosta", "Veneto"]
 
 if ONLY_SINGLE_ONE:
   # FILTERED_REGIONS = ["Italia"]
   FILTERED_REGIONS = ["Lombardia"]
 else:
-  FILTERED_REGIONS = ["Italia", "Emilia Romagna", "Lombardia", "Piemonte", "Veneto"]
+  FILTERED_REGIONS = ["Italia", "Emilia-Romagna", "Lombardia", "Piemonte", "Veneto"]
 
-COLORS = { "Emilia Romagna": "green", "Lazio": "magenta", "Lombardia": "blue", "Piemonte": "red", "Puglia": "pink", "Toscana": "purple", "Veneto": "orange", "Italia": "black" }
+COLORS = { "Emilia-Romagna": "green", "Lazio": "magenta", "Lombardia": "blue", "Piemonte": "red", "Puglia": "pink", "Toscana": "purple", "Veneto": "orange", "Italia": "black" }
 
 def randColor():
   return (random.random(), random.random(), random.random(), 1)
