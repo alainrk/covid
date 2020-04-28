@@ -72,8 +72,6 @@ for region in FILTERED_REGIONS:
   regions_data[region]["deceduti_ieri"] = regions_data[region]["deceduti_oggi"].shift(1)
   regions_data[region]["delta_deceduti"] = regions_data[region]["deceduti_oggi"] - regions_data[region]["deceduti_ieri"]
 
-  regions_data[region]["deceduti_oggi"] = (today - yesterday)
-
   regions_list.append(regions_data[region])
 
   # Manual reindex
@@ -94,7 +92,8 @@ for region in FILTERED_REGIONS:
   axs[1, 1].plot(X, "delta_terapia_intensiva", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
 
   axs[2, 0].plot(X, "deceduti", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
-  axs[2, 1].plot(X, "delta_deceduti", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
+  # axs[2, 1].plot(X, "delta_deceduti", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
+  axs[2, 1].plot(X, "deceduti_oggi", label=region, data=regions_data[region], markersize=2, color=getColor(region), linewidth=2)
 
 
 axs[0, 0].set_title('Totale casi')
