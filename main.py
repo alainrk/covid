@@ -15,7 +15,8 @@ if ONLY_SINGLE_ONE:
   # FILTERED_REGIONS = ["Italia"]
   FILTERED_REGIONS = ["Lombardia"]
 else:
-  FILTERED_REGIONS = ["Italia", "Emilia-Romagna", "Lombardia", "Piemonte", "Veneto"]
+  FILTERED_REGIONS = ["Italia", "Emilia-Romagna"]
+  # FILTERED_REGIONS = ["Italia", "Emilia-Romagna", "Lombardia", "Piemonte", "Veneto"]
 
 COLORS = { "Emilia-Romagna": "green", "Lazio": "magenta", "Lombardia": "blue", "Piemonte": "red", "Puglia": "pink", "Toscana": "purple", "Veneto": "orange", "Italia": "black" }
 
@@ -122,15 +123,19 @@ axs[0, 0].set_title('Totale casi')
 if ONLY_SINGLE_ONE:
   axs[0, 1].set_title('Aumento casi su giorno precedente / Tamponi')
 else:
-  axs[0, 1].set_title('Aumento casi su giorno precedente')
+  axs[0, 1].set_title('Aumento casi su giorno precedente (log)')
 
 axs[1, 0].set_title('Terapia intensiva')
-axs[1, 1].set_title('Aumento TI su giorno precedente')
+axs[1, 1].set_title('Aumento TI su giorno precedente (log)')
 
 axs[2, 0].set_title('Totale Deceduti')
-axs[2, 1].set_title('Aumento deceduti su giorno precedente')
+axs[2, 1].set_title('Aumento deceduti su giorno precedente (log)')
 
 axs[2, 1].legend(loc='upper center', bbox_to_anchor=(0, -0.2), ncol=5, fancybox=True, shadow=True)
+
+axs[0, 1].set_yscale('symlog')
+axs[1, 1].set_yscale('symlog')
+axs[2, 1].set_yscale('symlog')
 
 fig.suptitle('Covid-19 [{}]\nNormalizzato su 100 casi a t0'.format(datetime.now().strftime("%d/%m/%Y")))
 plt.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=None, hspace=0.3)
