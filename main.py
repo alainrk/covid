@@ -47,12 +47,12 @@ setColors()
 # data,denominazione_regione,ricoverati_con_sintomi,terapia_intensiva,totale_ospedalizzati,isolamento_domiciliare,totale_attualmente_positivi,nuovi_attualmente_positivi,dimessi_guariti,deceduti,totale_casi,tamponi
 
 df_it = pd.read_csv("italia.csv")
-df_it = df_it.filter(["data", "denominazione_regione", "totale_casi", "terapia_intensiva", "nuovi_attualmente_positivi", "deceduti", "totale_attualmente_positivi", "tamponi"])
+df_it = df_it.filter(["data", "denominazione_regione", "totale_casi", "terapia_intensiva", "nuovi_attualmente_positivi", "deceduti", "totale_attualmente_positivi", "tamponi", "casi_testati"])
 df_it["day"] = -1
 df_it["denominazione_regione"] = "Italia"
 
 df_reg = pd.read_csv("regioni.csv")
-df_reg = df_reg.filter(["data", "denominazione_regione", "totale_casi", "terapia_intensiva", "nuovi_attualmente_positivi", "deceduti", "totale_attualmente_positivi", "tamponi"])
+df_reg = df_reg.filter(["data", "denominazione_regione", "totale_casi", "terapia_intensiva", "nuovi_attualmente_positivi", "deceduti", "totale_attualmente_positivi", "tamponi", "casi_testati"])
 df_reg["day"] = -1
 
 frames = [df_it, df_reg]
